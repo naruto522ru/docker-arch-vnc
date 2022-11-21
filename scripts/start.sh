@@ -6,6 +6,11 @@ set -e
 [[ -f /scripts/init.sh ]] && /scripts/init.sh && rm /scripts/init.sh
 HOMEDIR="/home/docker_user"
 
+# Refresh mirrors list
+reflector --ipv4 @/etc/xdg/reflector/reflector.conf
+# Refresh Arch Repositories
+pacman -Syy
+
 umask 0077                # use safe default permissions
 mkdir -p "$HOMEDIR/.vnc"
 chmod go-rwx "$HOMEDIR/.vnc" # enforce safe permissions
